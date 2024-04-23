@@ -1,16 +1,5 @@
 /*
  Navicat Premium Data Transfer
-
- Source Server         : 150.158.107.109
- Source Server Type    : MySQL
- Source Server Version : 50744 (5.7.44-log)
- Source Host           : 150.158.107.109:3306
- Source Schema         : box_shop
-
- Target Server Type    : MySQL
- Target Server Version : 50744 (5.7.44-log)
- File Encoding         : 65001
-
  Date: 23/04/2024 12:32:43
 */
 
