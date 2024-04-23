@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.windy.mapper.GoodsMapper">
+
+    <update id="updateQuantity" parameterType="com.windy.entity.Goods">
+        UPDATE goods
+        SET quantity = #{quantity}
+        WHERE id = #{id}
+    </update>
+
+    <select id="pageSelect" resultType="com.windy.entity.Goods">
+        select a.*,
+               (select s.name from storage s where s.id = a.storage_id) storagename
+        from goods a
+            ${ew.customSqlSegment}
+    </select>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.windy.entity.Goods">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="storage_id" property="storageId"/>
+        <result column="category" property="category"/>
+        <result column="quantity" property="quantity"/>
+        <result column="notes" property="notes"/>
+        <result column="unit_volume" property="unitVolume"/>
+        <result column="total_volume" property="totalVolume"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , name, price, storage_id, category, quantity, notes, unit_volume, total_volume
+    </sql>
+
+</mapper>
