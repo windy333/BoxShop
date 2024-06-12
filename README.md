@@ -8,5 +8,5 @@ Computer design competition
 4. open in local:xxxx
    
 ## about
-1.The upgrade from the original springboot2.6 to springboot3.3 addresses some security issues
-2.build konwn bugs
+1. The upgrade from the original springboot2.6 to springboot3.3 addresses some security issues
+2. build konwn bugs
