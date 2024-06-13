@@ -3,24 +3,16 @@
     <div class="container">
       <el-row>
         <el-col :span="12">
-          <h2>单位容量计算器</h2>
+          <h2 style="padding: 5px;">单位容量计算器</h2>
           <el-form>
             <el-row>
-              <el-col :span="8">
+              <el-col :span="10">
                 <el-form-item label="物品体积">
                   <el-input v-model="volume" type="number"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col :span="8" style="margin-left: 50px">
-                <el-form-item label="物品质量">
-                  <el-input v-model="weight" type="number"></el-input>
-                </el-form-item>
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col :span="10">
-                <el-form-item label="物品种类">
+              <el-col :span="2222" style="margin-left: 4%">
+                <el-form-item label="物品种类" label-position="top">
                   <el-select v-model="species" placeholder="请选择物品种类">
                     <el-option label="食品类" value="1"><span>食品类</span></el-option>
                     <el-option label="医药类" value="2"><span>医药类</span></el-option>
@@ -34,32 +26,41 @@
                   </el-select>
                 </el-form-item>
               </el-col>
-
-              <el-col :span="8">
-                <el-form-item>
-                  <el-button type="primary" @click="calculateUnitCapacity">计算</el-button>
+            </el-row>
+            <el-row>
+              <el-col :span="10">
+                <el-form-item label="物品质量">
+                  <el-input v-model="weight" type="number"></el-input>
                 </el-form-item>
               </el-col>
-
-              <el-col :span="8">
-                <div v-if="result !== null">
-                  <p>参考单位容量为: <span>{{ result.data }}</span></p>
-                </div>
+              <el-col :span="8" style="margin-left: 4%">
+                <el-form-item label="参考单位容量">
+                  <el-input v-model="result.data" readonly></el-input>
+                </el-form-item>
               </el-col>
-
             </el-row>
-
+            <el-row>
+              <el-col :span="24">
+                <el-form-item>
+                  <i class="el-icon-cpu" style="cursor: pointer;font-size: 35px;margin-left: 500px;" 
+                    @click="calculateUnitCapacity">
+                  </i>
+                </el-form-item>
+              </el-col>
+            </el-row>
           </el-form>
-          <div id="radar" class="chart1" style="margin-top: 30px"></div>
         </el-col>
 
         <el-col :span="12">
           <div class="alert-section">
-            <h2>公告栏</h2>
-            <el-alert show-icon style="margin: 10px;" title="欢迎体验单位容量计算器" type="warning"></el-alert>
-            <el-alert show-icon style="margin: 10px;" title="请输入正确的格式和选择合适的种类，未知种类可按特殊类处理"
-                      type="info"></el-alert>
-            <h2 style="margin-top: 70px">智能化建设进度</h2>
+            <h2 style="padding: 5px;">公告栏</h2>
+            <el-alert style="margin: 10px;" title="最开始是看到各种酷炫优雅的前端界面非常心动而常常
+            怀疑自己， 但现在前端开发好像是最惨的了~ε=(´ο｀*)))唉，临近尾声了。学Java真是49年入国军，今
+            天终于下定决心走CPP的开发了， 换个赛道跑也许会有些机会吧。这个Java项目从轮子开始一点点造，个
+            人还是有很多的想法想加进去，但是时间和实力都来不及 补充了。最后将这个作品仅留在这作为一个曾经
+            的纪念~" type="warning" :closable="false">
+            </el-alert>
+            <h2 style="margin-top: 30px">销售利润预测</h2>
             <div id="pie" class="chart2" style="margin-top: 20px"></div>
           </div>
         </el-col>
@@ -71,7 +72,7 @@
 <script>
 import * as echarts from 'echarts/core';
 import {DatasetComponent, GridComponent, LegendComponent, TitleComponent, TooltipComponent} from 'echarts/components';
-import {LineChart, PieChart, RadarChart} from 'echarts/charts';
+import {LineChart, PieChart} from 'echarts/charts';
 import {LabelLayout} from 'echarts/features';
 import {CanvasRenderer} from 'echarts/renderers';
 
@@ -80,10 +81,8 @@ export default {
   name: "Calculate",
   mounted() {
     echarts.use([DatasetComponent, TooltipComponent, GridComponent, LegendComponent,
-      LineChart, PieChart, CanvasRenderer,  LabelLayout, RadarChart,
-      TitleComponent]);
+      LineChart, PieChart, CanvasRenderer,  LabelLayout,TitleComponent]);
     this.PieChart();
-    this.RadarChart();
   },
 
   data() {
@@ -91,53 +90,11 @@ export default {
       volume: 0,
       weight: 0,
       species: null,
-      result: null
+      result: { data: '' } // 初始化 result 为包含空字符串的对象
     };
   },
 
   methods: {
-    RadarChart() {
-      let chartDom = document.getElementById('radar');
-      let myChart = echarts.init(chartDom);
-      let option;
-      option = {
-        title: {
-          text: '2024 BoxShop 投资'
-        },
-        legend: {
-          data: ['预估(万元)', '实际(万元)']
-        },
-        radar: {
-          // shape: 'circle',
-          indicator: [
-            {name: '销售利润', max: 10000},
-            {name: '仓库费用', max: 16000},
-            {name: '科技投入', max: 30000},
-            {name: '员工投入', max: 38000},
-            {name: '门店宣传', max: 52000},
-            {name: '货物销售', max: 25000}
-          ]
-        },
-        series: [
-          {
-            name: 'Budget vs spending',
-            type: 'radar',
-            data: [
-              {
-                value: [4200, 14000, 20000, 35000, 50000, 18000],
-                name: '预估(万元)'
-              },
-              {
-                value: [5000, 14000, 28000, 26000, 42000, 21000],
-                name: '实际(万元)'
-              }
-            ]
-          }
-        ]
-      };
-      myChart.setOption(option);
-    },
-
     PieChart() {
       let chartDom = document.getElementById('pie');
       let myChart = echarts.init(chartDom);
@@ -227,10 +184,13 @@ export default {
             species: this.species
           })
         })
-            .then(response => response.json())
-            .then(data => {
-              this.result = data;
-            });
+        .then(response => response.json())
+        .then(data => {
+          this.result = data;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
       } else {
         alert('请先选择物品种类！');
       }
@@ -241,11 +201,6 @@ export default {
 
 
 <style scoped>
-.chart1 {
-  width: 650px;
-  height: 400px;
-}
-
 .chart2 {
   width: 650px;
   height: 430px;

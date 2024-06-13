@@ -8,7 +8,7 @@
                style="width: 100%; object-fit: cover;">
         </el-carousel-item>
         <el-carousel-item>
-          <img alt="Image 2" src="../assets/banner2.webp"
+          <img alt="Image 2" src="../assets/banner2.jpg"
                style="width: 100%; object-fit: cover;">
         </el-carousel-item>
         <el-carousel-item>
