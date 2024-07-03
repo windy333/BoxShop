@@ -22,7 +22,6 @@ import jakarta.annotation.Resource;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Resource
     private UserMapper userMapper;
-
     @Override
     public IPage pageCC(IPage<User> page, Wrapper wrapper) {
         return userMapper.pageCC(page, wrapper);

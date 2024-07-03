@@ -21,6 +21,6 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper extends BaseMapper<User> {
 
     // 查询,需要在xml中添加sql语句
-    IPage pageCC(IPage<User> page, @Param(Constants.WRAPPER) Wrapper wrapper);
+    IPage<User> pageCC(IPage<User> page, @Param(Constants.WRAPPER) Wrapper wrapper);
 
 }

@@ -19,7 +19,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface LogMapper extends BaseMapper<Log> {
     //查询
-    IPage pageCC(IPage<Log> page, @Param(Constants.WRAPPER) Wrapper wrapper);
+    IPage<Log> pageCC(IPage<Log> page, @Param(Constants.WRAPPER) Wrapper wrapper);
 
     //保存日志
     int insert(Log log);

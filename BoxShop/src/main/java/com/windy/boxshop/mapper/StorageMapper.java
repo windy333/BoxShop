@@ -20,5 +20,5 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface StorageMapper extends BaseMapper<Storage> {
     //查询
-    IPage pageCC(IPage<Storage> page, @Param(Constants.WRAPPER) Wrapper wrapper);
+    IPage<Storage> pageCC(IPage<Storage> page, @Param(Constants.WRAPPER) Wrapper wrapper);
 }

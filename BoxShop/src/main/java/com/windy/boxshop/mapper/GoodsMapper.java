@@ -19,8 +19,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface GoodsMapper extends BaseMapper<Goods> {
     //查询
-    IPage pageCC(IPage<Goods> page, @Param(Constants.WRAPPER) Wrapper wrapper);
-
+    IPage<Goods> pageCC(IPage<Goods> page, @Param(Constants.WRAPPER) Wrapper wrapper);
     //对数量的更新
     int updateQuantity(Goods goods);
 }
